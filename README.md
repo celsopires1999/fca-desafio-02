@@ -23,4 +23,4 @@ Divirtam-se e bom trabalho!
 
 1. Clonar o Repo `https://github.com/celsopires1999/fca-desafio-02.git` para obter a pasta db (criar e popular tabela no mySQL) e o docker-compose do desafio.
 2. Ir para a raiz do projeto e executar o comando docker-compose up.
-3. Digitar no navegador `http://localhost:8080/` para obter a lista de alguns módulos do curso.
+3. Digitar no navegador `http://localhost:8000/` para obter a lista de alguns módulos do curso.
