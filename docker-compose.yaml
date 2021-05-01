@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+    go:
+        image: celsopires/desafio-02-go
+        tty: true
+        command: go run main.go
+        networks: 
+            - go-mysql-net
+            - go-nginx-net
+
+    nginx:
+        image: celsopires/desafio-02-nginx
+        restart: always
+        tty: true
+        ports: 
+            - "8000:80"
+        depends_on:
+            - go
+        networks: 
+            - go-nginx-net
+
+    mysql:
+        image: mysql:5.7
+        command: --innodb-use-native-aio=0
+        restart: always
+        tty: true
+        volumes:
+            - ./dbdata:/var/lib/mysql
+            - ./db:/docker-entrypoint-initdb.d
+        environment: 
+            - MYSQL_ROOT_PASSWORD=desafio-01-mysql
+            - MYSQL_ROOT_PASSWORD=mypassword
+            - MYSQL_DATABASE=desafio-01
+            - MYSQL_USER=MainUser
+            - MYSQL_PASSWORD=MainPassword
+        networks: 
+            - go-mysql-net            
+
+networks: 
+    go-mysql-net:
+        driver: bridge
+    go-nginx-net:
+        driver: bridge
